@@ -26,13 +26,20 @@ build:
 container_scanning:
   extends: .container_scanning
 
+dgoss:
+  extends: .dgoss
+  stage: test
+  script:
+    - docker_setup
+    - dgoss run ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHORT_SHA} > goss.xml
+
 release:
   extends: .build
   stage: release
   script:
     - release_latest
     - docker login -u "strowi" -p "$DOCKER_TOKEN" "docker.io"
-    - docker tag "$CI_REGISTRY_IMAGE:latest" "strowi/alpine-squid"
-    - docker push "strowi/alpine-squid"
+    - docker tag "$CI_REGISTRY_IMAGE:latest" "strowi/squid"
+    - docker push "strowi/squid"
   rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
