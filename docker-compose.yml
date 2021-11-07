@@ -2,7 +2,7 @@ version: '2'
 
 services:
   squid:
-    image: registry.gitlab.com/strowi/docker-alpine-squid:latest
+    image: registry.gitlab.com/strowi/squid:latest
     build: ./
     restart: always
     ports:

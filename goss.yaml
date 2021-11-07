@@ -1,0 +1,9 @@
+squid:
+  installed: true
+  running: true
+
+port:
+  tcp:3128:
+    listening: true
+    ip:
+    - 0.0.0.0
